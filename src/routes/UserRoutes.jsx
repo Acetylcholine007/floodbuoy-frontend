@@ -1,37 +1,50 @@
-import { AccountBalanceRounded, AccountBalanceWalletRounded, DashboardRounded, HomeRounded, PersonRounded } from "@mui/icons-material";
+import {
+  AccountBalanceWalletRounded,
+  DashboardRounded,
+  HomeRounded,
+  InfoRounded,
+  MapRounded,
+  NewspaperRounded,
+  PersonRounded,
+  SettingsRounded,
+} from "@mui/icons-material";
 import { Route, Switch } from "react-router";
 
 import NotFoundPage from "../shared/pages/NotFoundPage";
-import ScanPage from "../views/dashboardView/pages/ScanPage";
-import ScanSummary from "../views/dashboardView/pages/ScanSummary";
-import UserDashboardPage from "../views/dashboardView/pages/UserDashboardPage";
-import ProfilePage from "../views/profileView/pages/ProfilePage";
-import CheckoutSummary from "../views/walletView/pages/CheckoutSummary";
-import WalletPage from "../views/walletView/pages/WalletPage";
+import HomePage from "../views/homeView/pages/HomePage";
+import StatisticsPage from "../views/statisticsView/pages/StatisticsPage";
+import MapPage from "../views/mapView/pages/MapPage";
+import AboutPage from "../views/aboutView/pages/AboutPage";
+import NewsPage from "../views/newsView/pages/NewsPage";
+import SupportPage from "../views/supportView/pages/SupportPage";
+import SettingsPage from "../views/settingsView/pages/SettingsPage";
 
 const UserRoutes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <UserDashboardPage />
+        <HomePage />
       </Route>
-      <Route exact path="/dashboard">
-        <UserDashboardPage />
+      <Route exact path="/home">
+        <HomePage />
       </Route>
-      <Route exact path="/dashboard/scan">
-        <ScanPage />
+      <Route exact path="/statistics">
+        <StatisticsPage />
       </Route>
-      <Route exact path="/dashboard/scanSummary">
-        <ScanSummary />
+      <Route exact path="/map">
+        <MapPage />
       </Route>
-      <Route exact path="/profile">
-        <ProfilePage />
+      <Route exact path="/about">
+        <AboutPage />
       </Route>
-      <Route exact path="/wallet">
-        <WalletPage />
+      <Route exact path="/news">
+        <NewsPage />
       </Route>
-      <Route exact path="/wallet/summary">
-        <CheckoutSummary />
+      <Route exact path="/support">
+        <SupportPage />
+      </Route>
+      <Route exact path="/settings">
+        <SettingsPage />
       </Route>
       <Route exact path="*">
         <NotFoundPage />
@@ -44,18 +57,38 @@ export default UserRoutes;
 
 export const userRoutes = [
   {
-    title: "Dashboard",
-    icon: <DashboardRounded />,
-    path: "/dashboard",
+    title: "Home",
+    icon: <HomeRounded />,
+    path: "/home",
   },
   {
-    title: "Transactions",
-    icon: <PersonRounded />,
-    path: "/profile",
+    title: "Statistics",
+    icon: <HomeRounded />,
+    path: "/statistics",
   },
   {
-    title: "Wallet",
-    icon: <AccountBalanceWalletRounded />,
-    path: "/wallet",
+    title: "Flood Map",
+    icon: <MapRounded />,
+    path: "/map",
+  },
+  {
+    title: "About",
+    icon: <InfoRounded />,
+    path: "/about",
+  },
+  {
+    title: "News",
+    icon: <NewspaperRounded />,
+    path: "/news",
+  },
+  {
+    title: "Support",
+    icon: <SettingsRounded />,
+    path: "/support",
+  },
+  {
+    title: "Settings",
+    icon: <SettingsRounded />,
+    path: "/settings",
   },
 ];

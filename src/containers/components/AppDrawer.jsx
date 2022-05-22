@@ -1,20 +1,22 @@
-import { LogoutOutlined } from "@mui/icons-material";
+import { LogoutOutlined, SettingsRounded } from "@mui/icons-material";
 import {
   Avatar,
   Button,
   Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { adminRoutes } from "../../routes/AdminRoutes";
 import { userRoutes } from "../../routes/UserRoutes";
-import "../../styles/AppDrawer.css";
-import logoURI from "/images/eco.png";
+import drawerLogo from "/images/drawerLogo.png";
 
 const AppDrawer = ({ accountType, logoutHandler }) => {
   const history = useHistory();
@@ -22,32 +24,25 @@ const AppDrawer = ({ accountType, logoutHandler }) => {
 
   return (
     <>
-      <div>
+      <div style={{background: "url('./images/drawer/authBackground.png')"}}>
         <Toolbar>
           <Stack direction="row" alignItems="center">
-            <Avatar sx={{ marginRight: "1rem" }} alt="avatar" src={logoURI} />
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-              Reverse Vending Machine
+              Flood Buoy
             </Typography>
           </Stack>
         </Toolbar>
-        <Divider />
-        <div className="navlink-container">
+        <Divider sx={{ width: "100%" }} />
+        <List>
           {(accountType === 1 ? userRoutes : adminRoutes).map((item, index) => (
-            <div className="link-wrapper" key={index}>
-              <NavLink
-                to={item.path}
-                key={index}
-                onClick={() => history.push(item.path)}
-              >
-                <div className="link-content">
-                  <span>{item.icon}</span>
-                  <p>{item.title}</p>
-                </div>
-              </NavLink>
-            </div>
+            <ListItem key={index} disablePadding>
+              <ListItemButton onClick={() => history.push(item.path)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
           ))}
-        </div>
+        </List>
       </div>
       <div
         style={{
@@ -56,15 +51,7 @@ const AppDrawer = ({ accountType, logoutHandler }) => {
           flexGrow: 1,
           justifyContent: "flex-end",
         }}
-      >
-        <Button
-          color="inherit"
-          onClick={logoutHandler}
-          startIcon={<LogoutOutlined />}
-        >
-          LOGOUT
-        </Button>
-      </div>
+      ></div>
     </>
   );
 };
