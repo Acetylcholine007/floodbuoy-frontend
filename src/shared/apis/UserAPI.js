@@ -1,6 +1,13 @@
 import requestAxios from "../../utils/requestAxios";
 
-const editAccount = async (data, loadingDispatch, snackbarDispatch) => {
+const editAccount = async (
+  data,
+  loadingDispatch,
+  snackbarDispatch,
+  callback,
+  userId
+) => {
+  console.log(data)
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(`/users/${userId}`, data, "PATCH");
   if (response.status === 200) {
@@ -12,6 +19,7 @@ const editAccount = async (data, loadingDispatch, snackbarDispatch) => {
         severity: "success",
       },
     });
+    callback();
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
@@ -25,9 +33,9 @@ const editAccount = async (data, loadingDispatch, snackbarDispatch) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const changePassword = async (password, loadingDispatch, snackbarDispatch) => {
+const changePassword = async (password, loadingDispatch, snackbarDispatch, userId) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
-  let response = await requestAxios(`/users/${userId}`, { password }, "PATCH");
+  let response = await requestAxios(`/users/changePassword/${userId}`, { password }, "PATCH");
   if (response.status === 200) {
     snackbarDispatch({
       type: "SET_PARAMS",

@@ -17,16 +17,60 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import UserAPI from "../../../shared/apis/UserAPI";
+import { AuthContext } from "../../../shared/contexts/AuthContext";
+import { LoadingContext } from "../../../shared/contexts/LoadingContext";
+import { SnackbarContext } from "../../../shared/contexts/SnackbarContext";
 
 const SettingsPage = () => {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [contactNo, setContactNo] = useState("");
+  const { userId, firstname, lastname, contactNo, updateLocalUserData } =
+    useContext(AuthContext);
+  const [newFirstName, setFirstName] = useState(firstname);
+  const [newLastName, setLastName] = useState(lastname);
+  const [newContactNo, setContactNo] = useState(contactNo);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { snackbarDispatch } = useContext(SnackbarContext);
+  const { loadingDispatch } = useContext(LoadingContext);
+
+  const editAccountHandler = () => {
+    UserAPI.editAccount(
+      {
+        firstname: newFirstName,
+        lastname: newLastName,
+        contactNo: newContactNo,
+      },
+      loadingDispatch,
+      snackbarDispatch,
+      () => {
+        updateLocalUserData(newFirstName, newLastName, newContactNo);
+      },
+      userId
+    );
+  };
+
+  const editPasswordHandler = () => {
+    if (confirmPassword === newPassword) {
+      UserAPI.changePassword(
+        newPassword,
+        loadingDispatch,
+        snackbarDispatch,
+        userId
+      );
+    } else {
+      snackbarDispatch({
+        type: "SET_PARAMS",
+        payload: {
+          message: "New Password and Confirm Password not match",
+          isOpen: true,
+          severity: "error",
+        },
+      });
+    }
+  };
 
   return (
     <Container sx={{ marginTop: "1rem" }}>
@@ -53,7 +97,7 @@ const SettingsPage = () => {
                   type="text"
                   variant="outlined"
                   onChange={(e) => setFirstName(e.target.value)}
-                  value={firstname}
+                  value={newFirstName}
                   fullWidth={true}
                   InputProps={{
                     startAdornment: (
@@ -70,7 +114,7 @@ const SettingsPage = () => {
                   type="text"
                   variant="outlined"
                   onChange={(e) => setLastName(e.target.value)}
-                  value={lastname}
+                  value={newLastName}
                   fullWidth={true}
                   InputProps={{
                     startAdornment: (
@@ -87,7 +131,7 @@ const SettingsPage = () => {
                   type="number"
                   variant="outlined"
                   onChange={(e) => setContactNo(e.target.value)}
-                  value={contactNo}
+                  value={newContactNo}
                   fullWidth={true}
                   InputProps={{
                     startAdornment: (
@@ -98,7 +142,7 @@ const SettingsPage = () => {
                   }}
                   sx={{ backgroundColor: "#f1effb" }}
                 />
-                <Button variant="contained" onClick={() => {}}>
+                <Button variant="contained" onClick={editAccountHandler}>
                   Save Changes
                 </Button>
               </Stack>
@@ -179,7 +223,7 @@ const SettingsPage = () => {
                   }}
                   sx={{ backgroundColor: "#f1effb" }}
                 />
-                <Button variant="contained" onClick={() => {}}>
+                <Button variant="contained" onClick={editPasswordHandler}>
                   Save Changes
                 </Button>
               </Stack>

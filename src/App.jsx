@@ -25,7 +25,8 @@ function App() {
     lastname,
     firstname,
     contactNo,
-    defaultBuoy
+    defaultBuoy,
+    updateLocalUserData
   } = useAuth();
 
   return (
@@ -44,6 +45,7 @@ function App() {
               defaultBuoy: defaultBuoy,
               login: login,
               logout: logout,
+              updateLocalUserData: updateLocalUserData
             }}
           >
             {!!token && <MainContainer />}

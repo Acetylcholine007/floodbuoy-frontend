@@ -1,4 +1,4 @@
-import { AccountCircleOutlined } from "@mui/icons-material";
+import { AccountCircleOutlined, LogoutSharp } from "@mui/icons-material";
 import {
   Avatar,
   Divider,
@@ -8,7 +8,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -28,7 +27,14 @@ const AppDrawer = ({ accountType, logoutHandler }) => {
 
   return (
     <>
-      <div style={{ background: `url(${drawerBackground})`, height: "100%" }}>
+      <div
+        style={{
+          background: `url(${drawerBackground})`,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Toolbar sx={{ backgroundColor: "primary.main" }} />
         <img src={drawerLogo} alt="Logo" style={{ width: "100%" }} />
         <List sx={{ color: "white" }} disablePadding>
@@ -73,15 +79,24 @@ const AppDrawer = ({ accountType, logoutHandler }) => {
             }
           })}
         </List>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+            justifyContent: "flex-end",
+          }}
+        >
+          <ListItem disablePadding>
+            <ListItemButton onClick={logoutHandler}>
+              <ListItemIcon sx={{ color: "white" }}>
+                <LogoutSharp />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} sx={{ color: "white" }} />
+            </ListItemButton>
+          </ListItem>
+        </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          justifyContent: "flex-end",
-        }}
-      ></div>
     </>
   );
 };

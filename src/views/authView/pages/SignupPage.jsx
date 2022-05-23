@@ -94,7 +94,11 @@ const SignupPage = () => {
           justifyContent="center"
           sx={{ margin: { xs: "0 2rem", md: "0 6rem" }, height: "100%" }}
         >
-          <Typography variant="h3" sx={{ marginBottom: "1.5rem" }} align='center'>
+          <Typography
+            variant="h3"
+            sx={{ marginBottom: "1.5rem" }}
+            align="center"
+          >
             Sign up for an account
           </Typography>
           <TextField

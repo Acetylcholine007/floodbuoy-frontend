@@ -89,14 +89,6 @@ const LoginPage = () => {
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
   };
 
-  const handleOpen = (scrap) => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const passwordResetHandler = async (email) => {
     handleClose();
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
@@ -130,17 +122,25 @@ const LoginPage = () => {
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
   };
 
+  const handleOpen = (scrap) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
-    // if (location.state?.toVerify) {
-    //   snackbarDispatch({
-    //     type: "SET_PARAMS",
-    //     payload: {
-    //       message: "Open verification email sent to you before logging in.",
-    //       isOpen: true,
-    //       severity: "info",
-    //     },
-    //   });
-    // }
+    if (location.state?.toVerify) {
+      snackbarDispatch({
+        type: "SET_PARAMS",
+        payload: {
+          message: "Open verification email sent to you before logging in.",
+          isOpen: true,
+          severity: "info",
+        },
+      });
+    }
   }, []);
 
   return (
@@ -214,14 +214,14 @@ const LoginPage = () => {
           >
             LOGIN
           </Button>
-          {/* <Button variant="text" onClick={handleOpen}>
+          <Button variant="text" onClick={handleOpen}>
             Forgot Password?
           </Button>
           {showResendVerification && (
             <Button variant="text" onClick={verificationHandler}>
               Resend Email Verification
             </Button>
-          )} */}
+          )}
           <Divider sx={{ width: "100%" }} />
           <Button
             variant="contained"

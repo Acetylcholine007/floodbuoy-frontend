@@ -1,7 +1,12 @@
 import axios from "axios";
 import { API_URL, APP_DEBUG, LS_USER_DATA } from "./constants";
 
-const requestAxios = async (endpoint, body, method, type) => {
+const requestAxios = async (
+  endpoint,
+  body,
+  method,
+  type = "application/json"
+) => {
   try {
     method = (method && method.toUpperCase()) || "GET";
     const storedData = JSON.parse(localStorage.getItem(LS_USER_DATA));
