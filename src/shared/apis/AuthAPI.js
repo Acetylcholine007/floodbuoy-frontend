@@ -19,7 +19,7 @@ const login = async (email, password, callback, errorCallback) => {
       response.user.accountType
     );
   } else {
-    errorCallback(response.user.message || "Failed to login");
+    errorCallback(response.data.message || "Failed to login");
   }
   return response;
 };
