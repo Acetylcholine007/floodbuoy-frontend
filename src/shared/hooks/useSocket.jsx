@@ -11,5 +11,5 @@ export const useSocket = (channel, callback) => {
     });
     socket.on(channel, callback);
     socket.on("disconnect", () => setTime("Server disconnected"));
-  }, []);
+  }, [channel]);
 };

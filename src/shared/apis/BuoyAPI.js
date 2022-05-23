@@ -9,7 +9,7 @@ const getReading = async (
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
   let response = await requestAxios(`/readings/${serialKey}`);
   if (response.status === 200) {
-    console.log(response)
+    console.log(response);
     callback(response.reading);
   } else {
     snackbarDispatch({
@@ -42,11 +42,20 @@ const getBuoys = async (loadingDispatch, snackbarDispatch, callback) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
 };
 
-const getBuoy = async (loadingDispatch, snackbarDispatch, callback, buoyId) => {
+const getBuoy = async (
+  loadingDispatch,
+  snackbarDispatch,
+  callback,
+  buoyId,
+  length,
+  range
+) => {
   loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
-  let response = await requestAxios(`/buoys/${buoyId}`);
+  let response = await requestAxios(
+    `/buoys/${buoyId}?readingLength=${length}&range=${range}`
+  );
   if (response.status === 200) {
-    callback();
+    callback(response.readings, response.buoy);
   } else {
     snackbarDispatch({
       type: "SET_PARAMS",
