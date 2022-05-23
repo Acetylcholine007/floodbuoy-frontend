@@ -72,6 +72,7 @@ const MainContainer = ({ window }) => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: 'primary.light'
         }}
       >
         <Toolbar>

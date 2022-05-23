@@ -1,12 +1,11 @@
 import {
-  AccountBalanceWalletRounded,
-  DashboardRounded,
-  HomeRounded,
-  InfoRounded,
-  MapRounded,
-  NewspaperRounded,
-  PersonRounded,
-  SettingsRounded,
+  DashboardSharp,
+  HomeSharp,
+  InfoSharp,
+  MapSharp,
+  NewspaperSharp,
+  SettingsSharp,
+  SupportAgentSharp,
 } from "@mui/icons-material";
 import { Route, Switch } from "react-router";
 
@@ -58,37 +57,40 @@ export default UserRoutes;
 export const userRoutes = [
   {
     title: "Home",
-    icon: <HomeRounded />,
+    icon: <HomeSharp />,
     path: "/home",
   },
   {
-    title: "Statistics",
-    icon: <HomeRounded />,
+    title: "Dashboard",
+    icon: <DashboardSharp />,
     path: "/statistics",
   },
   {
     title: "Flood Map",
-    icon: <MapRounded />,
+    icon: <MapSharp />,
     path: "/map",
   },
   {
+    title: "Divider",
+  },
+  {
     title: "About",
-    icon: <InfoRounded />,
+    icon: <InfoSharp />,
     path: "/about",
   },
   {
     title: "News",
-    icon: <NewspaperRounded />,
+    icon: <NewspaperSharp />,
     path: "/news",
   },
   {
     title: "Support",
-    icon: <SettingsRounded />,
+    icon: <SupportAgentSharp />,
     path: "/support",
   },
   {
     title: "Settings",
-    icon: <SettingsRounded />,
+    icon: <SettingsSharp />,
     path: "/settings",
   },
 ];

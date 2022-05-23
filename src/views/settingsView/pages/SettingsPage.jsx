@@ -29,11 +29,14 @@ const SettingsPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <Container>
+    <Container sx={{ marginTop: "1rem" }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Card>
-            <CardHeader title="Edit Profile" />
+            <CardHeader
+              title="Edit Profile"
+              sx={{ backgroundColor: "primary.light" }}
+            />
             <CardContent>
               <Stack
                 component="form"
@@ -104,7 +107,10 @@ const SettingsPage = () => {
         </Grid>
         <Grid item xs={12}>
           <Card>
-            <CardHeader title="Edit Profile" />
+            <CardHeader
+              title="Edit Profile"
+              sx={{ backgroundColor: "primary.light" }}
+            />
             <CardContent>
               <Stack
                 component="form"
@@ -162,7 +168,11 @@ const SettingsPage = () => {
                             setShowConfirmPassword(!showConfirmPassword)
                           }
                         >
-                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),

@@ -1,7 +1,9 @@
+import { ChevronLeftSharp, ChevronRightSharp } from "@mui/icons-material";
 import {
   Card,
   Container,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -13,7 +15,7 @@ import aboutLogo from "/images/aboutLogo.png";
 
 const AboutPage = () => {
   return (
-    <Container>
+    <Container sx={{marginTop: '1rem'}}>
       <Grid container spacing={2}>
         <Grid item xs={12} align="center">
           <img
@@ -23,32 +25,109 @@ const AboutPage = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Card>
-            <Typography vairant="h5">About FloodBuoy</Typography>
+          <Card
+            sx={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "#414D61",
+              color: "white",
+              borderRadius: '0.5rem'
+            }}
+          >
+            <Typography variant="h5">About FloodBuoy</Typography>
           </Card>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} sm={5}>
           <img
             src={aboutBanner}
             alt="Background image"
             style={{ width: "100%", bjectFit: "cover" }}
           />
         </Grid>
-        <Grid item xs={7}>
-          <List>
-            <ListItem>
+        <Grid item xs={12} sm={7}>
+          <List disablePadding>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              secondaryAction={
+                <IconButton
+                  onClick={() => window.open("https://www.facebook.com")}
+                >
+                  <ChevronRightSharp sx={{ color: "white" }} />
+                </IconButton>
+              }
+            >
               <ListItemText primary="Floodbuoy Team" />
             </ListItem>
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              secondaryAction={
+                <IconButton
+                  onClick={() => window.open("https://www.facebook.com")}
+                >
+                  <ChevronRightSharp sx={{ color: "white" }} />
+                </IconButton>
+              }
+            >
               <ListItemText primary="Contact Details" />
             </ListItem>
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              secondaryAction={
+                <IconButton
+                  onClick={() => window.open("https://www.facebook.com")}
+                >
+                  <ChevronRightSharp sx={{ color: "white" }} />
+                </IconButton>
+              }
+            >
               <ListItemText primary="Customer Review" />
             </ListItem>
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              secondaryAction={
+                <IconButton
+                  onClick={() => window.open("https://www.facebook.com")}
+                >
+                  <ChevronRightSharp sx={{ color: "white" }} />
+                </IconButton>
+              }
+            >
               <ListItemText primary="Download Brochure" />
             </ListItem>
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              secondaryAction={
+                <IconButton
+                  onClick={() => window.open("https://www.facebook.com")}
+                >
+                  <ChevronRightSharp sx={{ color: "white" }} />
+                </IconButton>
+              }
+            >
               <ListItemText primary="Request a Quote for Products and Services" />
             </ListItem>
           </List>

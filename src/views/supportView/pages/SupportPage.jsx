@@ -11,8 +11,8 @@ import React from "react";
 
 const SupportPage = () => {
   return (
-    <Container>
-      <Stack direction="column">
+    <Container sx={{marginTop: '1rem'}}>
+      <Stack direction="column" alignItems='center'>
         <Typography variant="body1">SUPPORT TEAM</Typography>
         <Typography variant="h5">
           Our friendly support team will help you with anything.
