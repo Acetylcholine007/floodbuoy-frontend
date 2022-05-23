@@ -9,8 +9,13 @@ import {
   IconButton,
   Grid,
   Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  LinearProgress,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import AuthAPI from "../../../shared/apis/AuthAPI";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -19,7 +24,13 @@ import LockIcon from "@mui/icons-material/Lock";
 import { SnackbarContext } from "../../../shared/contexts/SnackbarContext";
 import backgroundUrl from "/images/authBackground.png";
 import { LoadingContext } from "../../../shared/contexts/LoadingContext";
-import { PhoneRounded, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  LocationOnRounded,
+  PhoneRounded,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import BuoyAPI from "../../../shared/apis/BuoyAPI";
 
 const SignupPage = () => {
   const [firstname, setFirstname] = useState("");
@@ -27,16 +38,25 @@ const SignupPage = () => {
   const [contactNo, setContactNo] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [defaultBuoy, setDefaultBuoy] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { snackbarDispatch } = useContext(SnackbarContext);
-  const history = useHistory();
   const { loadingDispatch } = useContext(LoadingContext);
+  const [buoys, setBuoys] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    BuoyAPI.getBuoys(loadingDispatch, snackbarDispatch, (data) => {
+      setBuoys(data);
+      setDefaultBuoy(data[0]._id);
+    });
+  }, []);
 
   const signupHandler = async (event) => {
     event.preventDefault();
     loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: true } });
     await AuthAPI.signup(
-      { firstname, lastname, contactNo, email, password },
+      { firstname, lastname, contactNo, email, password, defaultBuoy },
       (isSuccess) => {
         loadingDispatch({ type: "SET_PARAMS", payload: { isOpen: false } });
         history.push({ pathname: "/login", state: { toVerify: isSuccess } });
@@ -74,7 +94,7 @@ const SignupPage = () => {
           justifyContent="center"
           sx={{ margin: { xs: "0 2rem", md: "0 6rem" }, height: "100%" }}
         >
-          <Typography variant="h3" sx={{ marginBottom: "1.5rem" }}>
+          <Typography variant="h3" sx={{ marginBottom: "1.5rem" }} align='center'>
             Sign up for an account
           </Typography>
           <TextField
@@ -169,6 +189,36 @@ const SignupPage = () => {
             }}
             sx={{ backgroundColor: "#f1effb" }}
           />
+          {buoys.length !== 0 && (
+            <FormControl fullWidth sx={{ backgroundColor: "#f1effb" }}>
+              <InputLabel id="demo-simple-select-label">
+                Default Location
+              </InputLabel>
+              <Select
+                labelId="location"
+                id="location"
+                value={defaultBuoy}
+                label="Default Location"
+                onChange={(e) => {
+                  setDefaultBuoy(e.target.value);
+                }}
+                inputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LocationOnRounded />
+                    </InputAdornment>
+                  ),
+                }}
+              >
+                {buoys.map((buoy) => (
+                  <MenuItem key={buoy._id} value={buoy._id}>
+                    {buoy.location}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+          {buoys.length === 0 && <LinearProgress />}
           <Button
             variant="contained"
             size="large"

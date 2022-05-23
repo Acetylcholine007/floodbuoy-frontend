@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import DataChart from "../components/DataChart";
 
 const StatisticsPage = () => {
   return (
@@ -62,7 +63,7 @@ const StatisticsPage = () => {
               </ButtonGroup>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Card>Flood Graph</Card>
+              <DataChart />
             </Grid>
             <Grid item xs={12} md={6}>
               <Card>Flood Graph</Card>

@@ -25,6 +25,7 @@ function App() {
     lastname,
     firstname,
     contactNo,
+    defaultBuoy
   } = useAuth();
 
   return (
@@ -40,6 +41,7 @@ function App() {
               lastname: lastname,
               firstname: firstname,
               contactNo: contactNo,
+              defaultBuoy: defaultBuoy,
               login: login,
               logout: logout,
             }}

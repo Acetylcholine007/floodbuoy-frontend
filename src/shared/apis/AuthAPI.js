@@ -10,15 +10,16 @@ const login = async (email, password, callback, errorCallback) => {
   if (response.status === 200) {
     console.log(response);
     callback(
-      response.data.userId,
-      response.data.token,
-      response.data.firstname,
-      response.data.lastname,
-      response.data.contactNo,
-      response.data.accountType
+      response.user.userId,
+      response.user.token,
+      response.user.firstname,
+      response.user.lastname,
+      response.user.contactNo,
+      response.user.defaultBuoy,
+      response.user.accountType
     );
   } else {
-    errorCallback(response.data.message || "Failed to login");
+    errorCallback(response.user.message || "Failed to login");
   }
   return response;
 };

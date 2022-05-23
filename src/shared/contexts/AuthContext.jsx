@@ -8,6 +8,7 @@ export const AuthContext = createContext({
   firstname: null,
   lastname: null,
   contactNo: null,
+  defaultBuoy: null,
   login: () => {},
   logout: () => {},
 });

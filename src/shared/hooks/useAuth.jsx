@@ -11,10 +11,11 @@ export const useAuth = () => {
   const [firstname, setFirstname] = useState(null);
   const [lastname, setLastname] = useState(null);
   const [contactNo, setContactNo] = useState(null);
+  const [defaultBuoy, setDefaultBuoy] = useState(null);
   const [accountType, setAccountType] = useState(1);
   const history = useHistory();
 
-  const login = useCallback((uid, token, firstname, lastname, contactNo, accType, expirationDate) => {
+  const login = useCallback((uid, token, firstname, lastname, contactNo, buoy, accType, expirationDate) => {
     let TOKEN_EXPIRATION = new Date(new Date().getTime() + 1000 * 60 * 60);
     const tokenExpirationDate = !!expirationDate ? expirationDate < new Date() ? TOKEN_EXPIRATION : expirationDate : TOKEN_EXPIRATION;
     setTokenExpirationDate(tokenExpirationDate);
@@ -26,6 +27,7 @@ export const useAuth = () => {
         firstname,
         lastname,
         contactNo,
+        defaultBuoy: buoy,
         expiration: tokenExpirationDate.toISOString(),
         accountType: accType
       })
@@ -34,6 +36,7 @@ export const useAuth = () => {
     setLastname(lastname);
     setFirstname(firstname);
     setContactNo(contactNo);
+    setDefaultBuoy(buoy);
     setToken(token);
     setAccountType(accType);
     history.push("/");
@@ -46,6 +49,7 @@ export const useAuth = () => {
     setFirstname(null);
     setLastname(null);
     setContactNo(null);
+    setDefaultBuoy(null);
     localStorage.removeItem(LS_USER_DATA);
     history.push("/");
   }, []);
@@ -75,11 +79,12 @@ export const useAuth = () => {
         storedData.lastname,
         storedData.firstname,
         storedData.contactNo,
+        storedData.defaultBuoy,
         storedData.accountType,
         new Date(storedData.expiration),
       );
     }
   }, [login]);
 
-  return { token, login, logout, userId, lastname, firstname, accountType };
+  return { token, login, logout, userId, contactNo, defaultBuoy, lastname, firstname, accountType };
 };
